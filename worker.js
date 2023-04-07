@@ -1,9 +1,7 @@
-var i = 0;
+importScripts("https://unpkg.com/node-sql-parser/umd/mysql.umd.js")
 
-function timedCount() {
-  i = i + 1;
-  postMessage(i);
-  setTimeout("timedCount()",500);
-}
-
-timedCount();
+const parser = new NodeSQLParser.Parser()
+const ast = parser.astify("select id, name from students where age < 18")
+console.log(ast)
+const sql = parser.sqlify(ast)
+console.log(sql)
